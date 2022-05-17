@@ -5,14 +5,7 @@ import (
 	"github.com/stakkato95/service-engineering-go-lib/logger"
 )
 
-type Config struct {
-	ServerPort   string `mapstructure:"SERVER_PORT"`
-	KafkaService string `mapstructure:"KAFKA_SERVICE"`
-}
-
-var AppConfig Config
-
-func init() {
+func Init(config interface{}, empty interface{}) {
 	viper.AddConfigPath(".")
 	viper.SetConfigName("app")
 	viper.SetConfigType("env")
@@ -22,11 +15,11 @@ func init() {
 		logger.Panic("config not found")
 	}
 
-	if err := viper.Unmarshal(&AppConfig); err != nil {
+	if err := viper.Unmarshal(config); err != nil {
 		logger.Panic("config can not be read")
 	}
 
-	if AppConfig == (Config{}) {
+	if config == empty {
 		logger.Panic("config is emtpy")
 	}
 }
