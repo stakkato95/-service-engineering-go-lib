@@ -1,2 +1,2 @@
-# -service-engineering-go-lib
+# service-engineering-go-lib
 Reusable components of a go service
